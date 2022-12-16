@@ -13,5 +13,28 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Applicacion Running');
 });
 
+app.get('/bye', (req: Request, res: Response) => {
+
+  // Reponse
+  res.setHeader('Content-Type', 'application/json')
+    .status(200)
+    .json({
+      "data": { "message": "Goodbye, world" }
+    });
+});
+
+app.get('/hello', (req: Request, res: Response) => {
+
+  // Get Query
+  const { name } = req.query;
+
+  // Reponse
+  res.setHeader('Content-Type', 'application/json')
+    .status(200)
+    .json({
+      "data": { "messague": `Hola, ${name || 'anónimo'}` }
+    });
+});
+
 // Listening
 app.listen(port, () => console.log(`Server running in http://localhost:${port}`));
