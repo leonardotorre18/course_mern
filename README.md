@@ -13,6 +13,12 @@
 - **concurrently** 
   Ejecución de multiples procesos en consola
 
+- **cors**
+  Maneja el Cross-Origin de las peticiones al servidor
+
+- **helmet**
+  Agrega seguridad al servidor
+
 - **eslint** 
   Reglas para mantener un código limpio
 
@@ -30,6 +36,9 @@
 
 
 ## Scripts
+
+- *build*
+  Compila el código TypeScript a JavaScript
 
 - *dev*
   Pone en marcha el servidor de desarrollo
