@@ -14,6 +14,7 @@ const port: number | string = process.env.PORT || 3000;
 // Define Server to use Routes
 app.use('/', routes);
 
+app.use(express.static('public'))
 app.use(helmet());
 app.use(cors());
 app.use(express.urlencoded({ extended: false, limit: '50mb' }));

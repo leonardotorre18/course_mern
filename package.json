@@ -4,9 +4,10 @@
   "description": "MERN  Mongodb + Express + React + Node  -  Course in OpenBootcamp",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "swagger": "tsoa spec",
+    "build": "webpack --mode production",
     "test": "jest",
-    "dev": "concurrently \"tsc --watch\" \"nodemon dist/src/index.js\""
+    "dev": "concurrently \"tsc --watch\" \"npm run swagger\" \"nodemon dist/src/index.js\""
   },
   "repository": {
     "type": "git",
@@ -19,27 +20,34 @@
   },
   "homepage": "https://github.com/leonardotorre18/course_mern#readme",
   "dependencies": {
+    "concurrently": "^7.6.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "helmet": "^6.0.1",
+    "mongoose": "^6.8.1",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.6.0",
+    "tsoa": "^4.1.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.15",
     "@types/jest": "^29.2.4",
     "@types/node": "^18.11.15",
+    "@types/swagger-jsdoc": "^6.0.1",
+    "@types/swagger-ui-express": "^4.1.3",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
-    "concurrently": "^7.6.0",
-    "cors": "^2.8.5",
     "eslint": "^8.29.0",
     "eslint-config-standard-with-typescript": "^24.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.6.0",
     "eslint-plugin-promise": "^6.1.1",
-    "helmet": "^6.0.1",
     "jest": "^29.3.1",
     "nodemon": "^2.0.20",
     "supertest": "^6.3.3",
     "ts-jest": "^29.0.3",
+    "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4",
     "webpack": "^5.75.0",
