@@ -1,4 +1,4 @@
-import { Get, Route, Tags } from "tsoa";
+import { Route, Tags, Get, Query } from "tsoa";
 import { BasicResponse } from "./types";
 import { IBasicController } from "./interfaces";
 import { logInfo } from "../utils/logger";
@@ -12,8 +12,7 @@ export class HelloController implements IBasicController {
    * @returns { Promise<BasicResponse> } Promise of BasicResponse
    */
   @Get("/")
-  public async getMessage(name?: string | undefined): Promise<BasicResponse> {
-    logInfo('Hello Route');;
+  public async getMessage(@Query()name?: string): Promise<BasicResponse> {
     return {
       message: `Hello ${name || "Word"}!`
     }
