@@ -1,5 +1,5 @@
 test('Function Example', () => {
-  expect(11).toBe(10)
+  expect(10).toBe(10)
 })
 
 test('Tests Running fine', () => {
