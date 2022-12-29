@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: 16
       - name: Intalling Dependencies of Project
-        run: npm ci
+        run: Run npm install --no-audit --no-fund --no-optional
       - name: Testing with Jest
         run: npm run test
 
