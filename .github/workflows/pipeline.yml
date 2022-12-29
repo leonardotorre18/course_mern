@@ -1,22 +1,49 @@
 name: Test
 
+
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
+    types: [opened, synchronize]
+
 
 jobs:
-  all_process:
-    runs-on: ubuntu-latest
+  avoid_reduncy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Cancel all builds
+        uses: styfle/cancel-workflow-action
+        with:
+          access_token: ${{  github.token  }}
+
+
+  test:
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 16
       - name: Intalling Dependencies of Project
-        run: npm install --no-audit --no-fund --no-optional
+        run: npm ci
       - name: Testing with Jest
         run: npm run test
+
+  # build:
+  #   needs: [eslint]
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16
+  #     - name: Intalling Dependencies of Project
+  #       run: npm ci
+  #     - name: Building Application
+  #       run: npm run build
+  #     - uses: actions/upload-artifact@v2
+  #       with:
+  #         name: dist
+  #         path: dist
