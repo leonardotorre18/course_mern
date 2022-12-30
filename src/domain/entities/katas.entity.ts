@@ -6,7 +6,7 @@ export const katasEntity = () => {
     description: String,
     level: Number,
     date: { type: Date, default: Date.now() },
-    user: { type: mongoose.Schema.Types.ObjectId, refs: 'Users' },
+    user: { type: mongoose.Schema.Types.ObjectId, refs: 'users' },
     valoration: { type: Number, min: 0, max: 5 },
     changes: Number
   },{
