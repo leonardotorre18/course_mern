@@ -1,8 +1,15 @@
-import { Route, Tags } from "tsoa";
+import { Route, Tags, Query, Get, Delete } from "tsoa";
 import { IUserController } from "./interfaces";
 
 // ORM - Users
-import { getAllUsers, getUserById } from "../domain/orm/user.orm";
+import {
+  getAllUsers,
+  getUserById,
+  deleteUser,
+  updateUser,
+  createUser
+} from "../domain/orm/user.orm";
+import { User } from "src/domain/types";
 
 
 @Route("/api/users")
@@ -11,12 +18,24 @@ export class UserController implements IUserController {
   /**
    * Endpoint to retreive the Users list in DB
    */
+  @Get('/')
   public async getUsers(): Promise<any> {
     return await getAllUsers()
   }
-  public async getUserById(id:string): Promise<any> {
+  @Get('/')
+  public async getUserById(@Query()id:string): Promise<any> {
     return await getUserById(id);
   }
-  
+  @Delete('/')
+  public async deleteUser(@Query()id: string | any): Promise<any> {
+    return await deleteUser(id);
+  }
+  public async updateUser(id: string, user: User): Promise<any> {
+    return await updateUser(id, user);
+  }
+
+  public async createUser(user: User): Promise<any> {
+    return await createUser(user);
+  }
 }
 

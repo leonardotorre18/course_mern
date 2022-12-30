@@ -9,6 +9,8 @@ export const katasEntity = () => {
     user: { type: mongoose.Schema.Types.ObjectId, refs: 'Users' },
     valoration: { type: Number, min: 0, max: 5 },
     changes: Number
+  },{
+    versionKey: false
   });
-  return mongoose.model('Katas', katasSchema);
+  return mongoose.models.katas || mongoose.model('katas', katasSchema);
 }

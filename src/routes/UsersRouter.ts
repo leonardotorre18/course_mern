@@ -13,13 +13,31 @@ router.route('/')
     const response = await controller.getUsers();
     logInfo(`[/api/users] Replied with ${response.length} results`);
     res.send(response)
-  });
-
-router.get('/:id', async (req:Request, res: Response) => {
-  const { id } = req.params
-  logInfo('[/api/users/:id] Get Id = '+id);
-  const response = await controller.getUserById(id);
-  res.send(response)
-});
+  })
+  .post(async (req: Request, res: Response) => {
+    const { name, age, email } = req.body;
+    const response = await controller.createUser({ name, age, email });
+    logInfo('[/api/users] Add new User');
+    res.send(response)
+  })
+  .delete(async (req:Request, res: Response) => {
+    const { id } = req.body;
+    logInfo('[/api/users/:id] Delete Id = '+ id );
+    const response = await controller.deleteUser(id);
+    res.send(response)
+  })
+  .put(async (req:Request, res: Response) => {
+    const { id, name, age, email } = req.body;
+    logInfo('[/api/users/] Update Id = '+id);
+    const response = await controller.updateUser(id, { name, age, email });
+    res.send(response)
+  })
+router.route('/:id')
+  .get(async (req:Request, res: Response) => {
+    const { id } = req.params
+    logInfo('[/api/users/:id] Get Id = '+id);
+    const response = await controller.getUserById(id);
+    res.send(response)
+  })
 
 export default router;

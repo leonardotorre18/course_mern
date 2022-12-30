@@ -5,6 +5,8 @@ export const userEntity = () => {
     name: String,
     email: String,
     age: Number
+  },{
+    versionKey: false
   });
-  return mongoose.models.Users || mongoose.model('Users', userSchema);
+  return mongoose.models.users || mongoose.model('users', userSchema);
 }
