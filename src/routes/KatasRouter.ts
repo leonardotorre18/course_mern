@@ -63,10 +63,17 @@ router.route('/')
     const response = await controller.deleteKata(id)
     res.send(response)
   })
-  router.get('/:id', async (req: Request, res: Response) => {
-    const { id } = req.params
-    const response = await controller.getKataById(id)
-    res.send(response)
-  })
+
+router.get('/:id', async (req: Request, res: Response) => {
+  const { id } = req.params
+  const response = await controller.getKataById(id)
+  res.send(response)
+})
+
+router.get('/sort/:order', async (req: Request, res: Response) => {
+  const { order } = req.params
+  const response = await controller.orderKatas(order);
+  res.send(response)
+})
 
 export default router

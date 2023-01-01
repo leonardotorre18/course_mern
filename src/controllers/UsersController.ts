@@ -22,7 +22,7 @@ export class UserController implements IUserController {
   public async getUsers(): Promise<any> {
     return await getAllUsers()
   }
-  @Get('/')
+  @Get('/{:id}')
   public async getUserById(@Query()id:string): Promise<any> {
     return await getUserById(id);
   }
@@ -30,10 +30,11 @@ export class UserController implements IUserController {
   public async deleteUser(@Query()id: string | any): Promise<any> {
     return await deleteUser(id);
   }
+  // @Put('/')
   public async updateUser(id: string, user: User): Promise<any> {
     return await updateUser(id, user);
   }
-
+  // @Post('/')
   public async createUser(user: User): Promise<any> {
     return await createUser(user);
   }

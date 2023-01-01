@@ -44,3 +44,39 @@ export const createKata = async (kata: any) => {
     logError('Error in CreateKata ORM ' + error);
   }
 }
+
+export const orderLevelKatas = async (): Promise<any[] | undefined> => {
+  try {
+    const response = await katasModel.find({ isDelete: false }).sort({level: -1})
+    return response
+  } catch (error) {
+    logError('Error in orderLevelKata ORM ' + error)
+  }
+}
+
+export const fiveNewKatas = async (): Promise<any[] | undefined> => {
+  try {
+    const response = await katasModel.find({ isDelete: false }).sort({level: -1}).limit(5)
+    return response
+  } catch (error) {
+    logError('Error in fiveNewKatas ORM ' + error)
+  }
+}
+
+export const orderValorationKatas =async () => {
+  try {
+    const response = await katasModel.find({ isDelete: false }).sort({valoration: -1})
+    return response
+  } catch (error) {
+    logError('Error in orderValorationKatas ORM ' + error)
+  }
+}
+
+export const orderIntentsKatas = async () => {
+  try {
+    const response = await katasModel.find({ isDelete: false }).sort({changes: -1})
+    return response
+  } catch (error) {
+    logError('Error in orderIntentsKatas ORM ' + error)
+  }
+}
