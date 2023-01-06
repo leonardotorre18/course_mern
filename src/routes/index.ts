@@ -8,6 +8,7 @@ import helloRouter from "./HelloRouter";
 import goodbyeRouter from './GoodbyeRouter'
 import UsersRouter from './UsersRouter';
 import KatasRouter from "./KatasRouter";
+import AuthRouter from "./AuthRouter";
 
 // Server Intance
 const server: Express = express();
@@ -21,12 +22,13 @@ rootRouter.get('/', (req: Request, res: Response) => {
   res.send('Welcomen to BackEnd Root')
 });
 
-// Router /Hello
 server.use('/api', rootRouter);
 server.use('/api/hello', helloRouter);
 server.use('/api/goodbye', goodbyeRouter);
 server.use('/api/users', UsersRouter);
 server.use('/api/katas', KatasRouter);
+
+server.use('/auth', AuthRouter)
 
 // Redirect
 server.get('*', (req: Request, res: Response) => {

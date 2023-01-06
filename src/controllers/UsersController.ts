@@ -6,8 +6,7 @@ import {
   getAllUsers,
   getUserById,
   deleteUser,
-  updateUser,
-  createUser
+  updateUser
 } from "../domain/orm/user.orm";
 import { User } from "src/domain/types";
 
@@ -33,10 +32,6 @@ export class UserController implements IUserController {
   // @Put('/')
   public async updateUser(id: string, user: User): Promise<any> {
     return await updateUser(id, user);
-  }
-  // @Post('/')
-  public async createUser(user: User): Promise<any> {
-    return await createUser(user);
   }
 }
 

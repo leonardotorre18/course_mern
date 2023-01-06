@@ -37,11 +37,3 @@ export const updateUser = async (id: string, user: User) => {
     logError('Error in UpdateUser ORM ' + error);
   }
 }
-
-export const createUser = async (user: User) => {
-  try {
-    return await userModel.insertMany([user])
-  } catch (error) {
-    logError('Error in CreateUser ORM ' + error);
-  }
-}
