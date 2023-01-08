@@ -13,6 +13,19 @@ export const getAllKatas = async (): Promise<any[] | undefined> => {
   }
 }
 
+export const getPaginationKatas = async (limit: any, pag: any): Promise<any[] | undefined> => {
+  try {
+    return await katasModel.find({
+      isDeleted: false
+    }, 'name level')
+    .limit(limit)
+    .skip((pag - 1) * limit)
+  } catch (error) {
+    logError('Error in GetPaginatioKatas ORM ' + error);
+  }
+}
+
+
 export const getKataById = async (id:string): Promise<any[] | null | undefined> => {
   try {
     return await katasModel.findById(id);

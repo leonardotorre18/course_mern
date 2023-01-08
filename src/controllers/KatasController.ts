@@ -10,7 +10,8 @@ import {
   orderLevelKatas,
   fiveNewKatas,
   orderValorationKatas,
-  orderIntentsKatas
+  orderIntentsKatas,
+  getPaginationKatas
 } from "../domain/orm/katas.orm";
 
 @Route('/api/katas')
@@ -23,6 +24,13 @@ class KatasController implements IKatasController {
   public async getKatas(): Promise<any> {
     try {
       return await getAllKatas();
+    } catch (error) {
+      logError(`Kata Controller ${error}`)
+    }
+  }
+  public async getPaginationKatas(limit: any, pag: any): Promise<any> {
+    try {
+      return await getPaginationKatas(limit, pag);
     } catch (error) {
       logError(`Kata Controller ${error}`)
     }

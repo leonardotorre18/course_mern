@@ -11,11 +11,13 @@ const controller: UserController = new UserController();
 
 router.route('/')
   .get(verifytoken, async (req: Request, res: Response) => {
-    const { id } = req.query;
+    const { id, limit, pag } = req.query;
 
     if (id) {
       logInfo('[/api/users] Get User by Id: ' + id)
       res.send(await controller.getUserById(id))
+    } else if (limit && pag ) {
+      res.send(await controller.getPaginationUser(limit, pag))
     } else {
       logInfo('[/api/users] Get All Users')
       res.send(await controller.getUsers())

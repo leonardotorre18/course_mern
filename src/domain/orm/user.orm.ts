@@ -16,9 +16,22 @@ export const getAllUsers = async (): Promise<any[] | undefined> => {
 
 export const getUserById = async (id:string): Promise<any> => {
   try {
-    return await userModel.findById(id);
+    return await userModel.findById(id); 
   } catch (error: any) {
     logError('Error in GetUserById ORM ' + error);
+    return { error: error.message }
+  }
+}
+
+export const getPaginationUser = async (limit: number, pag: number): Promise<any> => {
+  try {
+    return await userModel.find({
+      isDeleted: false
+    }, 'name email')
+    .limit(limit)
+    .skip((pag - 1) * limit)
+  } catch (error: any) {
+    logError('Error in GetPaginationUser ORM ' + error);
     return { error: error.message }
   }
 }

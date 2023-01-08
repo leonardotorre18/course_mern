@@ -6,7 +6,8 @@ import {
   getAllUsers,
   getUserById,
   deleteUser,
-  updateUser
+  updateUser,
+  getPaginationUser
 } from "../domain/orm/user.orm";
 import { User } from "src/domain/types";
 
@@ -25,6 +26,9 @@ export class UserController implements IUserController {
   public async getUserById(@Query()id:string | any): Promise<any> {
     return await getUserById(id);
   }
+  public async getPaginationUser(limit: number | any, pag: number | any): Promise<any> {
+    return await getPaginationUser(limit, pag);
+  }
   @Delete('/')
   public async deleteUser(@Query()id: string | any): Promise<any> {
     return await deleteUser(id);
@@ -33,5 +37,6 @@ export class UserController implements IUserController {
   public async updateUser(id: string, user: User): Promise<any> {
     return await updateUser(id, user);
   }
+
 }
 
