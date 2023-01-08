@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import KatasController from "../controllers/KatasController";
 import { logInfo } from "../utils/logger";
+import { verifytoken } from "../middlewares/verifytoken";
 
 // Router from Express
 const router = express.Router();
@@ -9,12 +10,12 @@ const router = express.Router();
 const controller: KatasController = new KatasController();
 
 router.route('/')
-  .get(async (req: Request, res: Response) => {
+  .get(verifytoken, async (req: Request, res: Response) => {
     const response = await controller.getKatas();
     logInfo(`[/api/katas] Replied with ${response.length} results`);
     res.send(response)
   })
-  .post(async (req: Request, res: Response) => {
+  .post(verifytoken, async (req: Request, res: Response) => {
     logInfo(`[/api/katas] Add New Kata`);
     const {
       name,
@@ -36,7 +37,7 @@ router.route('/')
     });
     res.send(response)
   })
-  .put(async (req: Request, res: Response) => {
+  .put(verifytoken, async (req: Request, res: Response) => {
     const {
       id,
       name,
@@ -58,19 +59,19 @@ router.route('/')
     })
     res.send(response)
   })
-  .delete(async (req: Request, res: Response) => {
+  .delete(verifytoken, async (req: Request, res: Response) => {
     const { id } = req.body
     const response = await controller.deleteKata(id)
     res.send(response)
   })
 
-router.get('/:id', async (req: Request, res: Response) => {
+router.get('/:id', verifytoken, async (req: Request, res: Response) => {
   const { id } = req.params
   const response = await controller.getKataById(id)
   res.send(response)
 })
 
-router.get('/sort/:order', async (req: Request, res: Response) => {
+router.get('/sort/:order', verifytoken, async (req: Request, res: Response) => {
   const { order } = req.params
   const response = await controller.orderKatas(order);
   res.send(response)
