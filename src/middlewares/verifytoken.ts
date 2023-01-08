@@ -1,5 +1,9 @@
 import jwt from 'jsonwebtoken'
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response, NextFunction } from 'express';
+import doctenv from "dotenv";
+
+doctenv.config();
+const secret = process.env.SECRET_KEY || 'SECRET_KEY';
 
 export const verifytoken = (req: Request, res: Response, next: NextFunction) => {
 
@@ -11,15 +15,16 @@ export const verifytoken = (req: Request, res: Response, next: NextFunction) => 
   if (!jwtToken) {
     return res.status(403).send({
       Authentication: false,
-      message: 'You arent permisions in this page'
+      message: 'You dont have permisions in this page'
     })
   }
 
-  jwt.verify(jwtToken, '', (error: any, decoded: any)=> {
+  jwt.verify(jwtToken, secret, (error: any, decoded: any)=> {
     if (error) {
       return res.status(500).send({
         Authentication: false,
-        message: 'Failed token, sorry'
+        message: 'Failed token, sorry',
+        error
       })
     }
 

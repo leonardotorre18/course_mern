@@ -25,10 +25,9 @@ rootRouter.get('/', (req: Request, res: Response) => {
 server.use('/api', rootRouter);
 server.use('/api/hello', helloRouter);
 server.use('/api/goodbye', goodbyeRouter);
-server.use('/api/users', UsersRouter);
 server.use('/api/katas', KatasRouter);
-
-server.use('/auth', AuthRouter)
+server.use('/api/users', UsersRouter);
+server.use('/api/auth', AuthRouter)
 
 // Redirect
 server.get('*', (req: Request, res: Response) => {

@@ -22,7 +22,7 @@ export class UserController implements IUserController {
     return await getAllUsers()
   }
   @Get('/{:id}')
-  public async getUserById(@Query()id:string): Promise<any> {
+  public async getUserById(@Query()id:string | any): Promise<any> {
     return await getUserById(id);
   }
   @Delete('/')

@@ -14,11 +14,12 @@ export const getAllUsers = async (): Promise<any[] | undefined> => {
   }
 }
 
-export const getUserById = async (id:string): Promise<any[] | null | undefined> => {
+export const getUserById = async (id:string): Promise<any> => {
   try {
     return await userModel.findById(id);
-  } catch (error) {
+  } catch (error: any) {
     logError('Error in GetUserById ORM ' + error);
+    return { error: error.message }
   }
 }
 

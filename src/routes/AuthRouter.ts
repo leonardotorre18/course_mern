@@ -1,7 +1,8 @@
 import { Request, response, Response, Router } from "express";
-import IUser from "src/domain/interfaces/IUser";
+import IUser from "../domain/interfaces/IUser";
 import bcript from "bcrypt";
 import { AuthController } from "../controllers/AuthController";
+import { verifytoken } from "../middlewares/verifytoken";
 
 const controller = new AuthController()
 
@@ -52,9 +53,13 @@ router.post('/login', async (req: Request, res: Response) => {
 
   if (email && password) {
     response = await controller.login({email, password})
-  } else response = {error: 'User is invalid'}
+  } else response = { error: 'User is invalid' }
 
   res.send(response)
 });
+
+router.get('/me', verifytoken, async (req: Request, res: Response) => {
+  res.send({message: 'Everything is ok'})
+})
 
 export default router;
