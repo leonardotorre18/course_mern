@@ -1,7 +1,9 @@
 import { logError } from "../../utils/logger";
 import { katasEntity } from "../entities/katas.entity";
+import { userEntity } from "../entities/user.entity";
 
 let katasModel = katasEntity();
+let userModel = userEntity();
 /**
  * Method to obtain all user in colleption Users in mongoDB
 */
@@ -25,6 +27,15 @@ export const getPaginationKatas = async (limit: any, pag: any): Promise<any[] | 
   }
 }
 
+export const getKatasByUser = async (userId: string | any): Promise<any[] | undefined> => {
+  try {
+    const {katas} = await userModel.findById(userId)
+    return await katasModel.find({ _id: {$in: katas} })
+  } catch (error) {
+    logError('Error in GetKatasByUser ORM ' + error);
+  }
+
+}
 
 export const getKataById = async (id:string): Promise<any[] | null | undefined> => {
   try {

@@ -11,8 +11,14 @@ const controller: KatasController = new KatasController();
 
 router.route('/')
   .get(verifytoken, async (req: Request, res: Response) => {
-    const { limit, pag } = req.query;
-    if (limit && pag ) {
+    const { limit, pag, id, user } = req.query;
+    if (id) {
+      const response = await controller.getKataById(id);
+      res.send(response)
+    } else if (user){
+      const response = await controller.getKatasByUser(user)
+      res.send(response)
+    } else if (limit && pag) {
       const response = await controller.getPaginationKatas(limit, pag)
       res.send(response)
     } else {
@@ -71,14 +77,8 @@ router.route('/')
     res.send(response)
   })
 
-router.get('/:id', verifytoken, async (req: Request, res: Response) => {
-  const { id } = req.params
-  const response = await controller.getKataById(id)
-  res.send(response)
-})
-
-router.get('/sort/:order', verifytoken, async (req: Request, res: Response) => {
-  const { order } = req.params
+router.get('/order', verifytoken, async (req: Request, res: Response) => {
+  const { order } = req.query
   const response = await controller.orderKatas(order);
   res.send(response)
 })

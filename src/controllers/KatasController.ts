@@ -11,7 +11,8 @@ import {
   fiveNewKatas,
   orderValorationKatas,
   orderIntentsKatas,
-  getPaginationKatas
+  getPaginationKatas,
+  getKatasByUser
 } from "../domain/orm/katas.orm";
 
 @Route('/api/katas')
@@ -35,12 +36,20 @@ class KatasController implements IKatasController {
       logError(`Kata Controller ${error}`)
     }
   }
+
+  public async getKatasByUser(userId: string | any): Promise<any> {
+    try {
+      return await getKatasByUser(userId);
+    } catch (error) {
+      logError(`Kata Controller ${error}`)
+    }
+  }
   /**
    * Endpoint to retrieve one kata that your id have been equal to id in param
    * @param {string} id
    */
   @Get('{:id}')
-  public async getKataById(id: string): Promise<any> {
+  public async getKataById(id: string | any): Promise<any> {
     try {
       return await getKataById(id);
     } catch (error) {
@@ -82,7 +91,7 @@ class KatasController implements IKatasController {
     }
   }
 
-  public async orderKatas(order: string): Promise<any> {
+  public async orderKatas(order: string | any): Promise<any> {
     try {
       if (order == 'level') return await orderLevelKatas();
       if (order == 'date') return await fiveNewKatas();
