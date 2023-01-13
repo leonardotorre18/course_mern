@@ -34,7 +34,8 @@ router.post('/register', async (req: Request, res: Response) => {
       name,
       email,
       age,
-      password: ashedPassword
+      password: ashedPassword,
+      katas: []
     });
     /* 
       Error response
